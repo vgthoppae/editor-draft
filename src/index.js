@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
+import 'draft-js/dist/Draft.css';
+import RichTextEditor from './richtexteditor';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export default function MyEditor() {
+  const [rawContent, setRawContent] = React.useState();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  const onCheck = () => {
+    alert(rawContent?rawContent.blocks[0].text:'nothing');
+  }
+  return (
+    <div>
+      <button onClick={onCheck}>
+        Hello
+      </button>
+      <RichTextEditor rawContent= {rawContent} setRawContent={setRawContent}/>
+    </div>
+    
+  );
+}
+
+ReactDOM.render(<MyEditor />, document.getElementById('root'));
